@@ -16,7 +16,7 @@ const styles = {
   },
   flex: {
     flex: 1,
-    marginLeft: -12,
+    marginLeft: 20,
     marginRight: 20,
   },
 };
@@ -44,7 +44,6 @@ function NavigationBar(props) {
           Add Employee</Button>
         </Toolbar>
       </AppBar>
-      <SearchPanel />
     </div>
   );
 }

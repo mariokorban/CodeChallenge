@@ -1,6 +1,7 @@
 import React from 'react';
 import NavigationBar from './NavigationBar';
-import SearchByName from './SearchByName';
+import SearchPanel from './SearchPanel';
+import AddEmployee from './AddEmployee';
 
 class App extends React.Component {
 
@@ -18,10 +19,11 @@ class App extends React.Component {
     }
     render(){
     return(
-            <div className="App">
+        <div className="App">
             <NavigationBar />
-            <SearchByName />
-            </div>
+            <SearchPanel />
+            <AddEmployee />
+        </div>
     );
 };
 }

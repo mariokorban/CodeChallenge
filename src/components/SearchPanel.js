@@ -1,67 +1,104 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import SearchField from './SearchField';
 import { Grid } from '@material-ui/core';
-import blue from '@material-ui/core/colors/blue';
+import Employee from './Employee';
 
-const styles = theme => ({
+const styles = {
   root: {
-    display: 'flex',
+    flexGrow: 1,
   },
-  formControl: {
-    margin: theme.spacing.unit * 5,
-  },
-  group: {
-    margin: `${theme.spacing.unit}px 0`,
-  },
-  formLabel: {
-      marginRight: theme.spacing.unit * 25,
-  },
-});
+};
 
 class SearchPanel extends React.Component {
   state = {
     value: 'search-by-name',
   };
 
-  handleChange = event => {
-    this.setState({ value: event.target.value });
+  handleChange = (event, value) => {
+    this.setState({ value });
   };
 
   render() {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-      
-        <FormControl component="fieldset" required className={classes.formControl}>
+      <div>
+      <Paper className={classes.root}>
         
-          <FormLabel component="legend">Search Employees: </FormLabel>
-        
-          <RadioGroup
-            aria-label="search"
-            name="search"
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
-            row={true}>
-            
-            
-            <FormControlLabel className={classes.formLabel} value="search-by-name" control={<Radio color="primary" />} label="Search By Name" />
-            <FormControlLabel className={classes.formLabel} value="search-by-department" control={<Radio color="primary" />} label="Search By Department" />
-            <FormControlLabel className={classes.formLabel} value="search-by-location" control={<Radio color="primary" />} label="Search By Location" />
-            <FormControlLabel className={classes.formLabel} value="search-by-job-title" control={<Radio color="primary" />} label="Search By Job Title" />
-            
-          </RadioGroup>
-          
-        </FormControl>
-        
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Search By Name" value="search-by-name" />
+          <Tab label="Search By Department" value="search-by-department" />
+          <Tab label="Search By Location" value="search-by-location" />
+          <Tab label="Search By Job Title" value="search-by-job-title" />
+        </Tabs>
+
+      </Paper>
+
+      <SearchField />
+
+      {/* <Grid container direction='row' jsutify='center' alignItems='center' alignContent='center' spacing={32} style={{ marginTop: '10px' }}>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Employee />
+      </Grid>
+
+      </Grid> */}
+
       </div>
     );
   }
