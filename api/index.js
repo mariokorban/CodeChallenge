@@ -8,7 +8,7 @@ const router = express.Router();
 
 //api call for all the employees
 router.get('/allEmployees', function(req, res, next) {
-	connection.query('SELECT * from employee', function (error, results, fields) {
+	connection.query('SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title ', function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -74,6 +74,15 @@ router.get('/locationEmployees/:loc', function(req, res, next) {
 //api call for the employees with specific job title
 router.get('/jobTitleEmployees/:jt', function(req, res, next) {
 	connection.query("SELECT * from employee,department,location,job_title where job_title.job_title like '%"+req.params.jt+"%' and department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title", function (error, results, fields) {
+		if (error) throw error;
+		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+	});
+});
+
+
+//remove employee (delete)
+router.get('/removeEmployee/:id', function(req, res, next) {
+	connection.query('DELETE from employee where id ='+req.params.id, function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});

@@ -69,7 +69,6 @@ class AddEmployee extends React.Component {
         <Card className={classes.card} style={{ width: '100%', height: '100%' }}>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
           title="Contemplative Reptile"
         />
         <CardContent>

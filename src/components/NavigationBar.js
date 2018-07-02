@@ -20,8 +20,16 @@ const styles = {
   },
 };
 
-function NavigationBar(props) {
-  const { classes } = props;
+
+class NavigationBar extends React.Component {  
+
+ 
+  navigateSearch = () =>{
+    window.history.pushState(null,'/api');
+  }
+
+  render(){
+    const { classes } = this.props;
   return (
     <div className={classes.root}>
       <AppBar position="static" color="primary">
@@ -30,7 +38,7 @@ function NavigationBar(props) {
             Employee Directory
           </Typography>
 
-          <Button color="inherit">
+          <Button color="inherit" onClick={this.navigateSearch}>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <SearchIcon />
           </IconButton>
@@ -45,6 +53,7 @@ function NavigationBar(props) {
       </AppBar>
     </div>
   );
+}
 }
 
 NavigationBar.propTypes = {

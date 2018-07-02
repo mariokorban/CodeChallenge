@@ -46,7 +46,7 @@ class SearchPanel extends React.Component {
 
       </Paper>
 
-      <SearchField field={this.state.value}/>
+      <SearchField field={this.state.value} />
 
       </div>
     );
