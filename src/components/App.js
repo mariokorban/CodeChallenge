@@ -1,7 +1,8 @@
 import React from 'react';
 import NavigationBar from './NavigationBar';
 import SearchPanel from './SearchPanel';
-import AddEmployee from './AddEmployee';
+import AddEmployee from './AddEmployee'; 
+
 
 class App extends React.Component {
 

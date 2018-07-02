@@ -45,7 +45,7 @@ class SearchPanel extends React.Component {
 
       </Paper>
 
-      <SearchField />
+      <SearchField field={this.state.value}/>
 
       {/* <Grid container direction='row' jsutify='center' alignItems='center' alignContent='center' spacing={32} style={{ marginTop: '10px' }}>
 

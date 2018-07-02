@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Button, Grid } from '@material-ui/core';
 
+//component styles
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -21,8 +22,41 @@ const styles = theme => ({
 
 class SearchField extends React.Component {
   state = {
+    search: 'search-by-name',
+    searchLabel: 'Search By Name',
+    searchValue: '',
   };
 
+  //handling the prop changes received from the SearchPanel
+  componentWillReceiveProps(nextProps) {
+    //comparision between old and new prop
+    if(this.props.field != nextProps.field){
+      //if the prop are different(prop changed)
+      this.setState({search: nextProps.field});
+      //changing states folowwing the new props
+      if(nextProps.field == 'search-by-name'){
+        this.setState({searchLabel: 'Search By Name'});
+      }
+      else if(nextProps.field == 'search-by-department'){
+        this.setState({searchLabel: 'Search By Department'});
+      }
+      else if(nextProps.field == 'search-by-location'){
+        this.setState({searchLabel: 'Search By Location'});
+      }
+      else if(nextProps.field == 'search-by-job-title'){
+        this.setState({searchLabel: 'Search By Job Title'});
+      }
+    }
+  };
+
+  handleTextChange = (event,searchValue)=> {
+      this.setState({ searchValue });
+  };
+
+  //Search method
+  search(){
+
+  };
 
   render() {
     const { classes } = this.props;
@@ -37,7 +71,9 @@ class SearchField extends React.Component {
         <Grid item xs={5} sm={3} md={3} lg={3} xl={3}>
         <TextField
           id="textfield"
-          placeholder="Search"
+          placeholder={this.state.searchLabel}
+          value={this.state.searchValue}
+          onChange={this.handleTextChange}
           marginTop="normal"
           style={{ width: '100%' }}
           InputProps={{
@@ -49,7 +85,7 @@ class SearchField extends React.Component {
         </Grid>
 
         <Grid item xs={1} sm={1} md={1} lg={1} xl={1}>
-        <Button variant="contained" size="medium" color="primary" className={classes.button} style={{ width: '100%' }}>
+        <Button variant="contained" size="medium" color="primary" onClick={this.search} className={classes.button} style={{ width: '100%' }}>
           Search
         </Button>
         </Grid>

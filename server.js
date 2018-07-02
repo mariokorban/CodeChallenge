@@ -1,6 +1,7 @@
 import config from './config';
 import apiRouter from './api';
 import path from 'path';
+import mysql from 'mysql';
 
 import express from 'express';
 const server = express(); //creating a server with express
@@ -17,6 +18,20 @@ server.get('/',(req,res) => {
 
 //automatically serve static assets present in public 
 server.use(express.static('public'));
+
+//connection to db
+server.use(function(req, res, next){
+	global.connection = mysql.createConnection({
+	  	host     : 'localhost',
+	  	user     : 'root',
+  		database : 'codechallenge'
+	});
+	connection.connect();
+	next();
+});
+
+//test on /api
+server.use('/api',apiRouter);
 
 //listening to the port used on the console
 server.listen(config.port, ()=> {
