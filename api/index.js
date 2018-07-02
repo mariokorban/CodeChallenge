@@ -17,7 +17,7 @@ router.get('/allEmployees', function(req, res, next) {
 
 //api call for the employees with specific names
 router.get('/nameEmployees/:name', function(req, res, next) {
-	connection.query("SELECT * from employee where `firstname` like '%"+req.params.name+"%' or `lastname` like '%"+req.params.name+"%'", function (error, results, fields) {
+	connection.query("SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title and `firstname` like '%"+req.params.name+"%' or `lastname` like '%"+req.params.name+"%'", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -56,7 +56,7 @@ router.get('/getJobTitles', function(req, res, next) {
 
 //api call for the employees with specific departments
 router.get('/departmentEmployees/:dep', function(req, res, next) {
-	connection.query("SELECT * from employee,department where department.department_name like '%"+req.params.dep+"%' and department.id = employee.department", function (error, results, fields) {
+	connection.query("SELECT * from employee,department,location,job_title where department.department_name like '%"+req.params.dep+"%' and department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -65,7 +65,7 @@ router.get('/departmentEmployees/:dep', function(req, res, next) {
 
 //api call for the employees with specific location
 router.get('/locationEmployees/:loc', function(req, res, next) {
-	connection.query("SELECT * from employee,location where location.location_name like '%"+req.params.loc+"%' and location.id = employee.location", function (error, results, fields) {
+	connection.query("SELECT * from employee,location,department,job_title where location.location_name like '%"+req.params.loc+"%' and department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -73,7 +73,7 @@ router.get('/locationEmployees/:loc', function(req, res, next) {
 
 //api call for the employees with specific job title
 router.get('/jobTitleEmployees/:jt', function(req, res, next) {
-	connection.query("SELECT * from employee,job_title where job_title.job_title like '%"+req.params.jt+"%' and job_title.id = employee.job_title", function (error, results, fields) {
+	connection.query("SELECT * from employee,department,location,job_title where job_title.job_title like '%"+req.params.jt+"%' and department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});

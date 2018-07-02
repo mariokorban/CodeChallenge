@@ -27,6 +27,7 @@ class SearchPanel extends React.Component {
     const { classes } = this.props;
 
     return (
+        // Tabbed Search Panel
       <div>
       <Paper className={classes.root}>
         
@@ -46,58 +47,6 @@ class SearchPanel extends React.Component {
       </Paper>
 
       <SearchField field={this.state.value}/>
-
-      {/* <Grid container direction='row' jsutify='center' alignItems='center' alignContent='center' spacing={32} style={{ marginTop: '10px' }}>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee />
-      </Grid>
-
-      </Grid> */}
 
       </div>
     );

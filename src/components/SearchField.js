@@ -25,6 +25,7 @@ class SearchField extends React.Component {
     search: 'search-by-name',
     searchLabel: 'Search By Name',
     searchValue: '',
+    employees: [],
   };
 
   //handling the prop changes received from the SearchPanel
@@ -62,6 +63,9 @@ class SearchField extends React.Component {
     const { classes } = this.props;
 
     return (
+      <div>
+
+        {/* Search form */}
       <form className={classes.container} noValidate autoComplete="off">
         
         <Grid container direction='row' alignItems='center' justify='center' spacing={8}>
@@ -94,6 +98,21 @@ class SearchField extends React.Component {
 
         </Grid>
       </form>
+
+      {/* Employees grid result */}
+      <Grid container direction='row' jsutify='center' alignItems='center' alignContent='center' spacing={32} style={{ marginTop: '10px' }}>
+
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
+
+        {/* Mapping all the employees resulting from the api */}
+        {this.state.employees.map(employee =>
+          <Employee key={employee.id} fullname={employee.firtname+" "+employee.lastname} dob={employee.dob} mobile={employee.mobile_number} email={employee.email} gender={employee.gender} profile_pic={employee.profile_picture}  />
+        )}
+
+        </Grid>
+
+      </Grid>
+      </div>
     );
   }
 }
