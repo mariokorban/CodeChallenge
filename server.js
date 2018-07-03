@@ -2,6 +2,7 @@ import config from './config';
 import apiRouter from './api';
 import path from 'path';
 import mysql from 'mysql';
+import bodyParser from 'body-parser';
 
 import express from 'express';
 const server = express(); //creating a server with express
@@ -32,6 +33,9 @@ server.use(function(req, res, next){
 
 //test on /api
 server.use('/api',apiRouter);
+
+//use json parser
+server.use(bodyParser.json());
 
 //listening to the port used on the console
 server.listen(config.port, ()=> {

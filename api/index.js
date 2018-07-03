@@ -1,6 +1,8 @@
 import express from 'express';
 import mysql from 'mysql';
 const router = express.Router();
+import bodyParser from 'body-parser';
+var jsonParser = bodyParser.json({ type: 'application/json'});
 
 // router.get('/employees', (req,res) => {
 //     res.send( {employees: data.employees });
@@ -8,7 +10,7 @@ const router = express.Router();
 
 //api call for all the employees
 router.get('/allEmployees', function(req, res, next) {
-	connection.query('SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title ', function (error, results, fields) {
+	connection.query('SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title', function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -17,7 +19,7 @@ router.get('/allEmployees', function(req, res, next) {
 
 //api call for the employees with specific names
 router.get('/nameEmployees/:name', function(req, res, next) {
-	connection.query("SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title and `firstname` like '%"+req.params.name+"%' or `lastname` like '%"+req.params.name+"%'", function (error, results, fields) {
+	connection.query("SELECT * from employee,department,location,job_title where department.department_id = employee.department and location.location_id = employee.location and job_title.job_title_id = employee.job_title and (`firstname` like '%"+req.params.name+"%' or `lastname` like '%"+req.params.name+"%')", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -26,7 +28,7 @@ router.get('/nameEmployees/:name', function(req, res, next) {
 
 //get department names
 router.get('/getDepartments', function(req, res, next) {
-	connection.query("SELECT department_name from department", function (error, results, fields) {
+	connection.query("SELECT * from department", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -35,7 +37,7 @@ router.get('/getDepartments', function(req, res, next) {
 
 //get locations
 router.get('/getLocations', function(req, res, next) {
-	connection.query("SELECT location_name from location", function (error, results, fields) {
+	connection.query("SELECT * from location", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
@@ -44,14 +46,11 @@ router.get('/getLocations', function(req, res, next) {
 
 //get job titles
 router.get('/getJobTitles', function(req, res, next) {
-	connection.query("SELECT job_title from job_title", function (error, results, fields) {
+	connection.query("SELECT * from job_title", function (error, results, fields) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
 });
-
-
-
 
 
 //api call for the employees with specific departments
@@ -86,5 +85,15 @@ router.get('/removeEmployee/:id', function(req, res, next) {
 		if (error) throw error;
 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
 	});
+});
+
+
+//insert new employee
+router.post('/addEmployee', jsonParser, function(req, res, next) {
+	// console.log(req.body);
+ 	connection.query("insert into employee(id,firstname,lastname,dob,mobile_number,email,gender,location,department,job_title,profile_picture) values ("+null+",'"+req.body.firstName+"','"+req.body.lastName+"','"+req.body.dateOfBirth+"','"+req.body.mobileNumber+"','"+req.body.email+"','"+req.body.gender+"',"+req.body.location+","+req.body.department+","+req.body.jobTitle+",'"+req.body.profile_pic+"');", function (error, results, fields) {
+ 		if (error) throw error;
+ 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+ 	});
 });
 export default router;

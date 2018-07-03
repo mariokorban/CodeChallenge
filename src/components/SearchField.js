@@ -66,6 +66,7 @@ class SearchField extends React.Component {
     }
   };
 
+  //gets the value put in the field regarding it's name and sets it in the state
   handleTextChange = (event,searchValue) => {
       this.setState({ searchValue: event.target.value });
   };
@@ -75,7 +76,7 @@ class SearchField extends React.Component {
   search = () => {
   //if the search panel is search by name  
     if(this.props.field == "search-by-name"){
-      axios.get('/api/nameEmployees/'+this.state.searchValue)
+      axios.get('api/nameEmployees/'+this.state.searchValue)
       .then(resp => {
         this.setState({
           employees: resp.data.response
@@ -159,9 +160,9 @@ class SearchField extends React.Component {
         
 
         {/* Mapping all the employees resulting from the api */}
-        {this.state.employees.map((employee,i) =>
+        {this.state.employees.map((employee) =>
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee key={i} id={employee.id} fullname={employee.firstname+" "+employee.lastname} dob={employee.dob} mobile={employee.mobile_number} email={employee.email} gender={employee.gender} profile_pic={employee.profile_picture} department={employee.department_name} location={employee.location_name} job_title={employee.job_title} />
+          <Employee key={employee.id} id={employee.id} fullname={employee.firstname+" "+employee.lastname} dob={employee.dob} mobile={employee.mobile_number} email={employee.email} gender={employee.gender} profile_pic={employee.profile_picture} department={employee.department_name} location={employee.location_name} job_title={employee.job_title} />
           </Grid>
         )}  
 
