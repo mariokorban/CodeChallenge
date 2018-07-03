@@ -221,7 +221,7 @@ class AddEmployee extends React.Component {
           <InputLabel htmlFor="jobTitle">Job Title</InputLabel>
           <Select
             native
-            value={this.state.jobtitle}
+            value={this.state.jobTitle}
             onChange={this.handleChange}
             className={classes.textField}
             margin= "normal"

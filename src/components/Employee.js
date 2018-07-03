@@ -8,8 +8,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { inherits } from 'util';
-import { Grid, DialogTitle, DialogContent, DialogContentText, DialogActions, Dialog, Slide, Snackbar } from '@material-ui/core';
+import { Grid, DialogTitle, DialogContent, DialogContentText, DialogActions, Dialog, Slide, Snackbar, AppBar, Toolbar, IconButton } from '@material-ui/core';
 import axios from 'axios';
+import EditEmployee from './EditEmployee';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles = {
   card: {
@@ -31,7 +33,7 @@ class Employee extends React.Component {
   state= {
     key: this.props.key,
     open: false,
-    open2: false,
+    openEdit: false,
     name: this.props.fullname,
   }
 
@@ -47,6 +49,20 @@ class Employee extends React.Component {
     this.setState({
       open: false,
     });
+  }
+
+  //handling the edit dialog open
+  handleOpenEditDialog = () =>{
+    this.setState({
+      openEdit: true,
+    })
+  }
+
+  //handling the edit dialog close
+  handleCloseEditDialog = () =>{
+    this.setState({
+      openEdit: false,
+    })
   }
 
 
@@ -107,12 +123,14 @@ class Employee extends React.Component {
         </CardContent>
         <Grid container justify="center">
         <CardActions>
-          <Button size="medium" color="primary">
+          <Button size="medium" color="primary" onClick={this.handleOpenEditDialog}>
             Edit
           </Button>
           <Button size="medium" color="primary" onClick={this.handleOpenDialog}>
             Remove
           </Button>
+
+          {/* remove dialog */}
           <Dialog
           open={this.state.open}
           keepMounted
@@ -138,6 +156,25 @@ class Employee extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {/* //Edit Dialog */}
+        <Dialog
+        fullWidth
+        open={this.state.openEdit}
+        onClose={this.handleCloseEditDialog}
+        TransitionComponent={Transition}
+      >
+      <AppBar className={classes.appBar}>
+          <Toolbar>
+              <IconButton color="inherit" onClick={this.handleCloseEditDialog} aria-label="Close">
+                <CloseIcon />
+              </IconButton>
+          </Toolbar>
+      </AppBar>
+
+        <EditEmployee id={this.props.id} department={this.props.department_id} location={this.props.location_id} jobTitle={this.props.job_title_id} firstName={this.props.firstname} lastName={this.props.lastname} dateOfBirth={this.props.dob} email={this.props.email} mobileNumber={this.props.mobile} gender={this.props.gender} />
+
+      </Dialog>
         </CardActions>
         </Grid>
       </Card>

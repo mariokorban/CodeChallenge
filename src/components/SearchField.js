@@ -162,7 +162,7 @@ class SearchField extends React.Component {
         {/* Mapping all the employees resulting from the api */}
         {this.state.employees.map((employee) =>
         <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
-          <Employee key={employee.id} id={employee.id} fullname={employee.firstname+" "+employee.lastname} dob={employee.dob} mobile={employee.mobile_number} email={employee.email} gender={employee.gender} profile_pic={employee.profile_picture} department={employee.department_name} location={employee.location_name} job_title={employee.job_title} />
+          <Employee key={employee.id.toString()} id={employee.id} department_id={employee.department_id} location_id={employee.location_id} job_title_id={employee.job_title_id} firstname={employee.firstname} lastname={employee.lastname} fullname={employee.firstname+" "+employee.lastname} dob={employee.dob} mobile={employee.mobile_number} email={employee.email} gender={employee.gender} profile_pic={employee.profile_picture} department={employee.department_name} location={employee.location_name} job_title={employee.job_title} />
           </Grid>
         )}  
 

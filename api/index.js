@@ -96,4 +96,16 @@ router.post('/addEmployee', jsonParser, function(req, res, next) {
  		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
  	});
 });
+
+
+//edit employee
+router.post('/editEmployee', jsonParser, function(req, res, next) {
+	// console.log(req.body);
+ 	connection.query("update employee set firstname = '"+req.body.firstName+"',lastname = '"+req.body.lastName+"',dob = '"+req.body.dateOfBirth+"',mobile_number = '"+req.body.mobileNumber+"',email = '"+req.body.email+"' ,gender = '"+req.body.gender+"', location = "+req.body.location+", department = "+req.body.department+", job_title = "+req.body.jobTitle+" where id = "+req.body.id+" ", function (error, results, fields) {
+ 		if (error) throw error;
+ 		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+ 	});
+});
+
+
 export default router;
